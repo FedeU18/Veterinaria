@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Error from "./Error";
 
 const Form = ({ setPacientes, pacientes }) => {
   const [paciente, setPaciente] = useState({
@@ -8,6 +9,13 @@ const Form = ({ setPacientes, pacientes }) => {
     alta: "",
     síntomas: "",
   });
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
+
   const [error, setError] = useState(false);
   const handleOnChange = (e) => {
     setPaciente({ ...paciente, [e.target.name]: e.target.value });
@@ -28,7 +36,7 @@ const Form = ({ setPacientes, pacientes }) => {
       return;
     }
     setError(false);
-    setPacientes([...pacientes, paciente]);
+    setPacientes([...pacientes, { ...paciente, id: generarId() }]);
     setPaciente({
       mascota: "",
       propietario: "",
@@ -49,11 +57,7 @@ const Form = ({ setPacientes, pacientes }) => {
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-xl py-10 px-5 mb-5"
       >
-        {error && (
-          <div className="bg-red-800 text-white p-3 mb-3 font-bold uppercase rounded-md">
-            <p className="">Todos los campos son obligatorios</p>
-          </div>
-        )}
+        {error && <Error mensaje="Todos los cambios son obligatorios" />}
         <div className="mb-5">
           <label
             htmlFor="mascota"
