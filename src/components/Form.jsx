@@ -73,6 +73,7 @@ const Form = ({ setPacientes, pacientes }) => {
             placeholder="Nombre de la mascota"
             value={paciente.mascota}
             onChange={handleOnChange}
+            autoComplete="off"
           />
         </div>
         <div className="mb-5">
@@ -90,6 +91,7 @@ const Form = ({ setPacientes, pacientes }) => {
             placeholder="Nombre del propietario"
             value={paciente.propietario}
             onChange={handleOnChange}
+            autoComplete="off"
           />
         </div>
         <div className="mb-5">
@@ -107,6 +109,7 @@ const Form = ({ setPacientes, pacientes }) => {
             placeholder="Email"
             value={paciente.email}
             onChange={handleOnChange}
+            autoComplete="off"
           />
         </div>
         <div className="mb-5">
@@ -123,6 +126,7 @@ const Form = ({ setPacientes, pacientes }) => {
             type="date"
             value={paciente.alta}
             onChange={handleOnChange}
+            autoComplete="off"
           />
         </div>
         <div className="mb-5">
@@ -140,6 +144,7 @@ const Form = ({ setPacientes, pacientes }) => {
             placeholder="Describe los Síntomas"
             value={paciente.síntomas}
             onChange={handleOnChange}
+            autoComplete="off"
           />
         </div>
         <input
