@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Form = () => {
+const Form = ({ setPacientes, pacientes }) => {
   const [paciente, setPaciente] = useState({
     mascota: "",
     propietario: "",
@@ -28,6 +28,14 @@ const Form = () => {
       return;
     }
     setError(false);
+    setPacientes([...pacientes, paciente]);
+    setPaciente({
+      mascota: "",
+      propietario: "",
+      email: "",
+      alta: "",
+      síntomas: "",
+    });
   };
 
   return (
