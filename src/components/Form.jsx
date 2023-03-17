@@ -1,7 +1,8 @@
+import { info } from "autoprefixer";
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Form = ({ setPacientes, pacientes }) => {
+const Form = ({ setPacientes, pacientes, infoPaciente }) => {
   const [paciente, setPaciente] = useState({
     mascota: "",
     propietario: "",
@@ -10,13 +11,21 @@ const Form = ({ setPacientes, pacientes }) => {
     síntomas: "",
   });
 
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(infoPaciente).length > 0) {
+      console.log(infoPaciente);
+      setPaciente(infoPaciente);
+    }
+  }, [infoPaciente]);
+
   const generarId = () => {
     const random = Math.random().toString(36).substr(2);
     const fecha = Date.now().toString(36);
     return random + fecha;
   };
 
-  const [error, setError] = useState(false);
   const handleOnChange = (e) => {
     setPaciente({ ...paciente, [e.target.name]: e.target.value });
   };
@@ -150,7 +159,7 @@ const Form = ({ setPacientes, pacientes }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-gray-100 uppercase font-bold  hover:bg-indigo-700 cursor-pointer rounded-sm transition-colors "
-          value="Agregar Paciente"
+          value={infoPaciente.id ? "Editar Paciente" : "Agregar Paciente"}
         />
       </form>
     </div>
