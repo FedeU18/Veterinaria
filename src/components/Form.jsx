@@ -2,7 +2,7 @@ import { info } from "autoprefixer";
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Form = ({ setPacientes, pacientes, infoPaciente }) => {
+const Form = ({ setPacientes, pacientes, infoPaciente, setInfoPaciente }) => {
   const [paciente, setPaciente] = useState({
     mascota: "",
     propietario: "",
@@ -44,8 +44,21 @@ const Form = ({ setPacientes, pacientes, infoPaciente }) => {
       setError(true);
       return;
     }
+
     setError(false);
-    setPacientes([...pacientes, { ...paciente, id: generarId() }]);
+
+    if (infoPaciente.id) {
+      //Editando
+      paciente.id = infoPaciente.id;
+      const pacientesActualizados = pacientes.map((pacienteState) =>
+        pacienteState.id === paciente.id ? paciente : pacienteState
+      );
+      setPacientes(pacientesActualizados);
+      setInfoPaciente({});
+    } else {
+      //nuevo
+      setPacientes([...pacientes, { ...paciente, id: generarId() }]);
+    }
     setPaciente({
       mascota: "",
       propietario: "",
