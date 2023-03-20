@@ -8,7 +8,7 @@ function App() {
   const [infoPaciente, setInfoPaciente] = useState({});
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("pacientes")).length > 0) {
+    if (JSON.parse(localStorage.getItem("pacientes"))?.length > 0) {
       setPacientes(JSON.parse(localStorage.getItem("pacientes")));
     }
   }, []);
